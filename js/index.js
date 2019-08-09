@@ -1,7 +1,16 @@
 // Your code goes here
 
-// offline and online
-
-window.addEventListener('online', (event) => {
-    console.log("You are now connected to the network.");
-});
+// select signup button
+const signUpBtn = document.querySelectorAll('.destination .btn');
+// console.log(signUpBtn);
+signUpBtn.forEach(btn=>{
+    btn.style.margin = '0 auto'
+    btn.addEventListener('mouseover', e =>{
+        let destination = e.path[1];
+        destination.classList.toggle('destinationMouseOver')
+    })
+    btn.addEventListener('mouseout', e =>{
+        let destination = e.path[1];
+        destination.classList.toggle('destinationMouseOver')
+    })
+})
