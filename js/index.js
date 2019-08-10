@@ -14,3 +14,15 @@ signUpBtn.forEach(btn=>{
         destination.classList.toggle('destinationMouseOver')
     })
 })
+//
+
+window.addEventListener('scroll', e=>{
+    // console.log(e.path[0].images[0].y)
+    let header = document.querySelector('header');
+    if(e.path[0].images[0].y <= 90){
+        header = document.querySelector('header');
+        header.classList.add("scrollActive")
+    } else if(e.path[0].images[0].y > 90){
+        header.classList.remove("scrollActive")
+    }
+})
