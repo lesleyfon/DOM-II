@@ -32,31 +32,51 @@ document.addEventListener('keypress', e=>{
 })
 
 // drag event 
-const contentSection = document.querySelectorAll('.content-section');
+let dragged = document.querySelectorAll('.drop-zone');
 
-
-
-function drop(e){
-    e.preventDefault()
-    let dropData = e.dataTransfer.getData('id');
-}
-
-function drag(e){
-    e.preventDefault()
-
-}
-
-
-contentSection.forEach(cs=>{
-    // Allow drop
-    cs.addEventListener('dragover', e=>{
+dragged.forEach(dragItem=>{
+    //event fired on dragable item 
+    dragItem.addEventListener('drag', function(e){
+        console.log(e)
+    }, false);
+    
+    dragItem.addEventListener('dragstart', e=>{
+        dragged = e.target;
+        e.target.style.opacity = 0.5;
+    }, false);
+    
+    dragItem.addEventListener('dragend', e=>{
+    
+        e.target.style.opacity = '';
+    }, false);
+    
+    dragItem.addEventListener('dragover', e=>{
         e.preventDefault();
-    })
-    // handles the drop
-    cs.addEventListener('drop', drop)
-
-    // handle drag
-    cs.addEventListener('dragstart', drag)
-    // console.log(cs)
-})   
-
+    }, false);
+    
+    dragItem.addEventListener('dragenter', e =>{
+        e.preventDefault()
+        if(e.target.className = 'drop-zone'){
+            e.target.style.background = 'grey';
+        }
+    }, false);
+    
+    dragItem.addEventListener('dragleave', e=>{
+        e.preventDefault()
+        if (event.target.className == "dropzone") {
+            event.target.style.background = "";
+        }
+    }, false);
+    
+    
+    dragItem.addEventListener('drop', e=>{
+        e.preventDefault();
+    
+        if(e.target.className ==='drop-zone'){
+            e.target.style = '';
+            dragged.parentNode.removeChild(dragged);
+            e.target.appendChild(dragged);
+        }
+    }, false)
+    
+})
