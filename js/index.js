@@ -37,16 +37,15 @@ let dragged = document.querySelectorAll('.drop-zone');
 dragged.forEach(dragItem=>{
     //event fired on dragable item 
     dragItem.addEventListener('drag', function(e){
-        console.log(e)
+        e.preventDefault()
     }, false);
     
     dragItem.addEventListener('dragstart', e=>{
-        dragged = e.target;
+       dragItem = e.target;
         e.target.style.opacity = 0.5;
     }, false);
     
     dragItem.addEventListener('dragend', e=>{
-    
         e.target.style.opacity = '';
     }, false);
     
@@ -70,12 +69,16 @@ dragged.forEach(dragItem=>{
     
     
     dragItem.addEventListener('drop', e=>{
-        e.preventDefault();
-    
+        e.stopPropagation();
+        let textContent = dragItem;
+
         if(e.target.className ==='drop-zone'){
             e.target.style = '';
-            dragged.parentNode.removeChild(dragged);
-            e.target.appendChild(dragged);
+            console.log(dragItem)
+            console.log(e.target)
+            dragItem.parentNode.removeChild(dragItem);
+            e.target.appendChild(dragItem);
+
         }
     }, false)
     
