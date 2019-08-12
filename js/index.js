@@ -26,3 +26,37 @@ window.addEventListener('scroll', e=>{
         header.classList.remove("scrollActive")
     }
 })
+
+document.addEventListener('keypress', e=>{
+    alert(`You pressed the ${e.key} keys`)
+})
+
+// drag event 
+const contentSection = document.querySelectorAll('.content-section');
+
+
+
+function drop(e){
+    e.preventDefault()
+    let dropData = e.dataTransfer.getData('id');
+}
+
+function drag(e){
+    e.preventDefault()
+
+}
+
+
+contentSection.forEach(cs=>{
+    // Allow drop
+    cs.addEventListener('dragover', e=>{
+        e.preventDefault();
+    })
+    // handles the drop
+    cs.addEventListener('drop', drop)
+
+    // handle drag
+    cs.addEventListener('dragstart', drag)
+    // console.log(cs)
+})   
+
